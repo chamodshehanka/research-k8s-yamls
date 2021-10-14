@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-model
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: ts-model-server
+  template:
+    metadata:
+      labels:
+        run: ts-model-server
+    spec:
+      containers:
+        - name: octo-guacamole
+          image: ghcr.io/shehanka/octo-guacamole:latest
+          env: 
+            - name: PROMETHEUS_ENDPOINT
+              value: http://prometheus.linkerd-viz.svc.cluster.local:9090
