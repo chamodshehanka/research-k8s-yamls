@@ -30,6 +30,6 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: http
+      targetPort: 8000
   selector:
     run: ts-model-server
