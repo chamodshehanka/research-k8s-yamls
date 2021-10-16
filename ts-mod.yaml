@@ -18,6 +18,9 @@ spec:
           env: 
             - name: PROMETHEUS_ENDPOINT
               value: http://prometheus.linkerd-viz.svc.cluster.local:9090
+          ports:
+            - containerPort: 8000
+              name: http
 ---
 apiVersion: v1
 kind: Service
