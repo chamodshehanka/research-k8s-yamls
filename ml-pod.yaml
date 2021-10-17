@@ -29,3 +29,28 @@ spec:
     app: ml-app
 
 # kubectl -n research run curl-foo --image=radial/busyboxplus:curl -i --tty --rm
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ml-cronjob
+  labels:
+    app: ml-app
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: ml-cronjob
+            image: ghcr.io/sithumonline/octo-py:latest
+            env:
+            - name: PROMETHEUS_ENDPOINT
+              value: http://prometheus.linkerd-viz.svc.cluster.local:9090
+            command:
+            - /bin/sh
+            - -c
+            - cd /app && poetry run cron
+          restartPolicy: OnFailure
