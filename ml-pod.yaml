@@ -49,6 +49,8 @@ spec:
             env:
             - name: PROMETHEUS_ENDPOINT
               value: http://prometheus.linkerd-viz.svc.cluster.local:9090
+            - name: MONGO_URI
+              value: mongodb+srv://admin_sam:Gux1n53eeeUvHHMS@cluster0.9mcab.mongodb.net/EscalaDB?retryWrites=true&w=majority
             command:
             - /bin/sh
             - -c
