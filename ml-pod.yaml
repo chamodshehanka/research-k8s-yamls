@@ -8,11 +8,17 @@ spec:
   containers:
   - name: podinfo
     image: ghcr.io/sithumonline/octo-py:latest
+    command:
+    - /bin/sh
+    - -c
+    - cd /app && poetry run ml
     ports:
     - containerPort: 80
     env:
     - name: PROMETHEUS_ENDPOINT
       value: http://prometheus.linkerd-viz.svc.cluster.local:9090
+    - name: MONGO_URI
+      value: mongodb+srv://admin_sam:Gux1n53eeeUvHHMS@cluster0.9mcab.mongodb.net/EscalaDB?retryWrites=true&w=majority
 ---
 apiVersion: v1
 kind: Service
